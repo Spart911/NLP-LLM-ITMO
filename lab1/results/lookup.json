@@ -1,0 +1,599 @@
+{
+  "pipeline": [
+    {
+      "query": "Найди ноутбуки дешевле 70 000 рублей",
+      "params": {
+        "category": "laptop",
+        "max_price": 70000,
+        "sort_by": "price_asc"
+      },
+      "products": [
+        "Acer Aspire 3, Acer — 45000 ₽, остаток 6",
+        "MSI Modern 15, MSI — 48000 ₽, остаток 4",
+        "Huawei MateBook D16, Huawei — 54000 ₽, остаток 7",
+        "Honor MagicBook 14, Honor — 62000 ₽, остаток 4",
+        "Lenovo IdeaPad 5, Lenovo — 69000 ₽, остаток 3"
+      ],
+      "message": null,
+      "correct": true,
+      "error": null
+    },
+    {
+      "query": "Покажи самые дорогие смартфоны",
+      "params": {
+        "category": "smartphone",
+        "max_price": null,
+        "sort_by": "price_desc"
+      },
+      "products": [
+        "iPhone 15, Apple — 110000 ₽, остаток 3",
+        "Samsung Galaxy S24, Samsung — 95000 ₽, остаток 2",
+        "Xiaomi 14, Xiaomi — 72000 ₽, остаток 4",
+        "Google Pixel 8a, Google — 45000 ₽, остаток 5",
+        "Samsung Galaxy A35, Samsung — 28000 ₽, остаток 8",
+        "Honor X9b, Honor — 25000 ₽, остаток 9",
+        "Realme Note, Realme — 15000 ₽, остаток 12",
+        "Tecno Spark 20, Tecno — 12000 ₽, остаток 15"
+      ],
+      "message": null,
+      "correct": true,
+      "error": null
+    },
+    {
+      "query": "Хочу посмотреть планшеты",
+      "params": {
+        "category": "tablet",
+        "max_price": null,
+        "sort_by": "price_asc"
+      },
+      "products": [
+        "Lenovo Tab M10, Lenovo — 16000 ₽, остаток 11",
+        "Honor Pad X8, Honor — 18000 ₽, остаток 10",
+        "Huawei MatePad SE, Huawei — 22000 ₽, остаток 8",
+        "Samsung Galaxy Tab A9, Samsung — 27000 ₽, остаток 6",
+        "Xiaomi Pad 6, Xiaomi — 30000 ₽, остаток 5",
+        "Huawei MatePad 11, Huawei — 54000 ₽, остаток 4",
+        "iPad Air, Apple — 79000 ₽, остаток 3",
+        "Samsung Galaxy Tab S9, Samsung — 98000 ₽, остаток 2"
+      ],
+      "message": null,
+      "correct": true,
+      "error": null
+    },
+    {
+      "query": "Покажи ноутбуки до 50 тысяч",
+      "params": {
+        "category": "laptop",
+        "max_price": 50000,
+        "sort_by": "price_asc"
+      },
+      "products": [
+        "Acer Aspire 3, Acer — 45000 ₽, остаток 6",
+        "MSI Modern 15, MSI — 48000 ₽, остаток 4"
+      ],
+      "message": null,
+      "correct": true,
+      "error": null
+    },
+    {
+      "query": "Найди холодильники",
+      "params": {
+        "category": "other",
+        "max_price": null,
+        "sort_by": "price_asc"
+      },
+      "products": [],
+      "message": "Категория не поддерживается. Поиск по каталогу не выполняется.",
+      "correct": true,
+      "error": null
+    },
+    {
+      "query": "Возьми что-нибудь для конспектов и фильмов, тысяч до тридцати",
+      "params": {
+        "category": "tablet",
+        "max_price": 30000,
+        "sort_by": "price_asc"
+      },
+      "products": [
+        "Lenovo Tab M10, Lenovo — 16000 ₽, остаток 11",
+        "Honor Pad X8, Honor — 18000 ₽, остаток 10",
+        "Huawei MatePad SE, Huawei — 22000 ₽, остаток 8",
+        "Samsung Galaxy Tab A9, Samsung — 27000 ₽, остаток 6",
+        "Xiaomi Pad 6, Xiaomi — 30000 ₽, остаток 5"
+      ],
+      "message": null,
+      "correct": true,
+      "error": null
+    },
+    {
+      "query": "Нужен нормальный экран в карман, не самый дешевый",
+      "params": {
+        "category": "other",
+        "max_price": null,
+        "sort_by": "price_asc"
+      },
+      "products": [],
+      "message": "Категория не поддерживается. Поиск по каталогу не выполняется.",
+      "correct": true,
+      "error": null
+    },
+    {
+      "query": "Есть ли ноутбуки дешевле 20 тысяч",
+      "params": {
+        "category": "laptop",
+        "max_price": 20000,
+        "sort_by": "price_asc"
+      },
+      "products": [],
+      "message": "Подходящих товаров нет.",
+      "correct": true,
+      "error": null
+    },
+    {
+      "query": "Покажи смартфоны до 30 тысяч",
+      "params": {
+        "category": "smartphone",
+        "max_price": 30000,
+        "sort_by": "price_asc"
+      },
+      "products": [
+        "Tecno Spark 20, Tecno — 12000 ₽, остаток 15",
+        "Realme Note, Realme — 15000 ₽, остаток 12",
+        "Honor X9b, Honor — 25000 ₽, остаток 9",
+        "Samsung Galaxy A35, Samsung — 28000 ₽, остаток 8"
+      ],
+      "message": null,
+      "correct": true,
+      "error": null
+    },
+    {
+      "query": "Покажи самые дешевые планшеты",
+      "params": {
+        "category": "tablet",
+        "max_price": null,
+        "sort_by": "price_asc"
+      },
+      "products": [
+        "Lenovo Tab M10, Lenovo — 16000 ₽, остаток 11",
+        "Honor Pad X8, Honor — 18000 ₽, остаток 10",
+        "Huawei MatePad SE, Huawei — 22000 ₽, остаток 8",
+        "Samsung Galaxy Tab A9, Samsung — 27000 ₽, остаток 6",
+        "Xiaomi Pad 6, Xiaomi — 30000 ₽, остаток 5",
+        "Huawei MatePad 11, Huawei — 54000 ₽, остаток 4",
+        "iPad Air, Apple — 79000 ₽, остаток 3",
+        "Samsung Galaxy Tab S9, Samsung — 98000 ₽, остаток 2"
+      ],
+      "message": null,
+      "correct": true,
+      "error": null
+    }
+  ],
+  "without_database": [
+    {
+      "source": "Найди ноутбуки дешевле 70 000 рублей",
+      "ask": "Какие ноутбуки дешевле 70 000 рублей есть в каталоге?",
+      "catalog": [
+        "Acer Aspire 3, Acer — 45000 ₽, остаток 6",
+        "MSI Modern 15, MSI — 48000 ₽, остаток 4",
+        "Huawei MateBook D16, Huawei — 54000 ₽, остаток 7",
+        "Honor MagicBook 14, Honor — 62000 ₽, остаток 4",
+        "Lenovo IdeaPad 5, Lenovo — 69000 ₽, остаток 3"
+      ],
+      "model_answer": "К сожалению, я не имею доступа к вашему личному каталогу товаров, базе данных магазина или текущим ценам в реальном времени. Я — искусственный интеллект, и мои знания ограничены общедоступной информацией, которая не включает специфические списки товаров конкретного магазина.\n\nЧтобы найти ноутбуки дешевле 70 000 рублей, рекомендую:\n\n1. **Использовать фильтры на сайте магазина**: Введите в поисковую строку «ноутбуки» и установите фильтр по цене «до 70 000 ₽».\n2. **Обратиться к менеджеру**: Если у вас есть доступ к менеджеру магазина, попросите его составить подборку по вашему запросу.\n3. **Указать бренд или характеристики**: Если вы хотите, чтобы я помог с выбором, уточните:\n   - Какой бренд вас интересует?\n   - Для каких задач нужен ноутбук (работа, игры, учеба)?\n   - Какие минимальные требования к процессору, оперативной памяти и экрану?\n\nЯ могу помочь с рекомендациями по моделям, которые обычно попадают в этот ценовой диапазон, если вы предоставите дополнительные детали!",
+      "catalog_names_in_answer": []
+    },
+    {
+      "source": "Покажи самые дорогие смартфоны",
+      "ask": "Какие самые дорогие смартфоны есть в каталоге?",
+      "catalog": [
+        "iPhone 15, Apple — 110000 ₽, остаток 3",
+        "Samsung Galaxy S24, Samsung — 95000 ₽, остаток 2",
+        "Xiaomi 14, Xiaomi — 72000 ₽, остаток 4",
+        "Google Pixel 8a, Google — 45000 ₽, остаток 5",
+        "Samsung Galaxy A35, Samsung — 28000 ₽, остаток 8",
+        "Honor X9b, Honor — 25000 ₽, остаток 9",
+        "Realme Note, Realme — 15000 ₽, остаток 12",
+        "Tecno Spark 20, Tecno — 12000 ₽, остаток 15"
+      ],
+      "model_answer": "К сожалению, я не имею доступа к вашему личному каталогу товаров, базе данных магазина или текущему списку товаров.\n\nЧтобы я мог помочь вам, пожалуйста:\n1. **Укажите источник данных** (например, название магазина, ссылку на каталог или предоставьте список товаров с ценами).\n2. **Прикрепите файл** или **вставьте текст** с перечнем смартфонов и их ценами.\n\nПосле этого я смогу отсортировать их по убыванию цены и назвать самые дорогие модели.",
+      "catalog_names_in_answer": []
+    },
+    {
+      "source": "Есть ли ноутбуки дешевле 20 тысяч",
+      "ask": "Какие ноутбуки дешевле 20 000 рублей есть в каталоге?",
+      "catalog": [],
+      "model_answer": "К сожалению, я не имею доступа к вашему личному каталогу товаров, базе данных магазина или текущим ценам в реальном времени. Я — искусственный интеллект, и мои знания ограничены общедоступной информацией, а не конкретными инвентарными списками частных или корпоративных систем.\n\nОднако я могу помочь вам **найти ноутбуки дешевле 20 000 рублей** в популярных российских магазинах (например, Ozon, Wildberries, DNS, M.Video, Citilink). Вот что обычно можно найти в этом ценовом сегменте:\n\n### Типичные характеристики ноутбуков до 20 000 ₽:\n- **Процессор**: Intel Celeron N4020/N4500, Intel Pentium Silver N5030/N6000, AMD Athlon Silver 3050e/3050U.\n- **Оперативная память**: 4 ГБ или 8 ГБ DDR4.\n- **Накопитель**: SSD на 128 ГБ или 256 ГБ (иногда eMMC).\n- **Экран**: 14–15.6 дюймов, разрешение HD (1366×768) или FHD (1920×1080).\n- **ОС**: Часто Windows 11 Home (Single Language) или Linux.\n\n### Популярные модели в этом бюджете (примеры):\n1. **Lenovo IdeaPad 1 / 3** — часто встречаются с процессорами Intel Celeron или Pentium.\n2. **Acer Aspire 3** — базовые версии с Celeron/Pentium.\n3. **HP 15s / 250 G8/G9** — простые офисные модели.\n4. **Chuwi / Teclast / Xiaomi Mi Notebook** — китайские бренды, которые иногда предлагают более производительные конфигурации за меньшие деньги (но с рисками по гарантии и качеству сборки).\n\n### Как найти их самостоятельно:\n1. Зайдите на сайт **Ozon.ru** или **Wildberries.ru**.\n2. В поиске введите: `ноутбук до 20000`.\n3. Используйте фильтры:\n   - Цена: от 0 до 20 000 ₽.\n   - Тип: Ноутбуки.\n   - Оперативная память: 8 ГБ (желательно).\n   - Накопитель: SSD.\n\nЕсли вы хотите, я могу помочь сравнить конкретные модели, которые вы нашли, или подсказать, на что обратить внимание при выборе ноутбука в этом бюджете.",
+      "catalog_names_in_answer": []
+    }
+  ],
+  "tools": [
+    {
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "search_products",
+          "args": {
+            "category": "laptop",
+            "max_price": 70000,
+            "sort_by": "price_asc"
+          },
+          "id": "5a6e938f-ea77-9015-9f34-41091e529dd3_0"
+        }
+      ],
+      "searched": true,
+      "returned_to_model": false,
+      "outcomes": [
+        {
+          "name": "search_products",
+          "args": {
+            "category": "laptop",
+            "max_price": 70000,
+            "sort_by": "price_asc"
+          },
+          "searched": true,
+          "error": null,
+          "result": {
+            "params": {
+              "category": "laptop",
+              "max_price": 70000,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              {
+                "id": 1,
+                "name": "Acer Aspire 3",
+                "brand": "Acer",
+                "category": "laptop",
+                "price": 45000,
+                "stock": 6
+              },
+              {
+                "id": 2,
+                "name": "MSI Modern 15",
+                "brand": "MSI",
+                "category": "laptop",
+                "price": 48000,
+                "stock": 4
+              },
+              {
+                "id": 3,
+                "name": "Huawei MateBook D16",
+                "brand": "Huawei",
+                "category": "laptop",
+                "price": 54000,
+                "stock": 7
+              },
+              {
+                "id": 4,
+                "name": "Honor MagicBook 14",
+                "brand": "Honor",
+                "category": "laptop",
+                "price": 62000,
+                "stock": 4
+              },
+              {
+                "id": 5,
+                "name": "Lenovo IdeaPad 5",
+                "brand": "Lenovo",
+                "category": "laptop",
+                "price": 69000,
+                "stock": 3
+              }
+            ],
+            "message": null
+          }
+        }
+      ],
+      "note": null,
+      "query": "Найди ноутбуки дешевле 70 000 рублей"
+    },
+    {
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "search_products",
+          "args": {
+            "category": "smartphone",
+            "sort_by": "price_desc"
+          },
+          "id": "chatcmpl-tool-a9ac9225e0de3b81"
+        }
+      ],
+      "searched": true,
+      "returned_to_model": false,
+      "outcomes": [
+        {
+          "name": "search_products",
+          "args": {
+            "category": "smartphone",
+            "max_price": null,
+            "sort_by": "price_desc"
+          },
+          "searched": true,
+          "error": null,
+          "result": {
+            "params": {
+              "category": "smartphone",
+              "max_price": null,
+              "sort_by": "price_desc"
+            },
+            "products": [
+              {
+                "id": 16,
+                "name": "iPhone 15",
+                "brand": "Apple",
+                "category": "smartphone",
+                "price": 110000,
+                "stock": 3
+              },
+              {
+                "id": 15,
+                "name": "Samsung Galaxy S24",
+                "brand": "Samsung",
+                "category": "smartphone",
+                "price": 95000,
+                "stock": 2
+              },
+              {
+                "id": 14,
+                "name": "Xiaomi 14",
+                "brand": "Xiaomi",
+                "category": "smartphone",
+                "price": 72000,
+                "stock": 4
+              },
+              {
+                "id": 13,
+                "name": "Google Pixel 8a",
+                "brand": "Google",
+                "category": "smartphone",
+                "price": 45000,
+                "stock": 5
+              },
+              {
+                "id": 12,
+                "name": "Samsung Galaxy A35",
+                "brand": "Samsung",
+                "category": "smartphone",
+                "price": 28000,
+                "stock": 8
+              },
+              {
+                "id": 11,
+                "name": "Honor X9b",
+                "brand": "Honor",
+                "category": "smartphone",
+                "price": 25000,
+                "stock": 9
+              },
+              {
+                "id": 10,
+                "name": "Realme Note",
+                "brand": "Realme",
+                "category": "smartphone",
+                "price": 15000,
+                "stock": 12
+              },
+              {
+                "id": 9,
+                "name": "Tecno Spark 20",
+                "brand": "Tecno",
+                "category": "smartphone",
+                "price": 12000,
+                "stock": 15
+              }
+            ],
+            "message": null
+          }
+        }
+      ],
+      "note": null,
+      "query": "Покажи самые дорогие смартфоны"
+    },
+    {
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "search_products",
+          "args": {
+            "category": "tablet"
+          },
+          "id": "7003a0fd-1729-9965-b19a-e3db61edd2f9_0"
+        }
+      ],
+      "searched": true,
+      "returned_to_model": false,
+      "outcomes": [
+        {
+          "name": "search_products",
+          "args": {
+            "category": "tablet",
+            "max_price": null,
+            "sort_by": "price_asc"
+          },
+          "searched": true,
+          "error": null,
+          "result": {
+            "params": {
+              "category": "tablet",
+              "max_price": null,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              {
+                "id": 17,
+                "name": "Lenovo Tab M10",
+                "brand": "Lenovo",
+                "category": "tablet",
+                "price": 16000,
+                "stock": 11
+              },
+              {
+                "id": 18,
+                "name": "Honor Pad X8",
+                "brand": "Honor",
+                "category": "tablet",
+                "price": 18000,
+                "stock": 10
+              },
+              {
+                "id": 19,
+                "name": "Huawei MatePad SE",
+                "brand": "Huawei",
+                "category": "tablet",
+                "price": 22000,
+                "stock": 8
+              },
+              {
+                "id": 20,
+                "name": "Samsung Galaxy Tab A9",
+                "brand": "Samsung",
+                "category": "tablet",
+                "price": 27000,
+                "stock": 6
+              },
+              {
+                "id": 21,
+                "name": "Xiaomi Pad 6",
+                "brand": "Xiaomi",
+                "category": "tablet",
+                "price": 30000,
+                "stock": 5
+              },
+              {
+                "id": 22,
+                "name": "Huawei MatePad 11",
+                "brand": "Huawei",
+                "category": "tablet",
+                "price": 54000,
+                "stock": 4
+              },
+              {
+                "id": 23,
+                "name": "iPad Air",
+                "brand": "Apple",
+                "category": "tablet",
+                "price": 79000,
+                "stock": 3
+              },
+              {
+                "id": 24,
+                "name": "Samsung Galaxy Tab S9",
+                "brand": "Samsung",
+                "category": "tablet",
+                "price": 98000,
+                "stock": 2
+              }
+            ],
+            "message": null
+          }
+        }
+      ],
+      "note": null,
+      "query": "Хочу посмотреть планшеты"
+    },
+    {
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "search_products",
+          "args": {
+            "category": "laptop",
+            "max_price": 50000,
+            "sort_by": "price_asc"
+          },
+          "id": "call_c926936cf50143c9b9589090"
+        }
+      ],
+      "searched": true,
+      "returned_to_model": false,
+      "outcomes": [
+        {
+          "name": "search_products",
+          "args": {
+            "category": "laptop",
+            "max_price": 50000,
+            "sort_by": "price_asc"
+          },
+          "searched": true,
+          "error": null,
+          "result": {
+            "params": {
+              "category": "laptop",
+              "max_price": 50000,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              {
+                "id": 1,
+                "name": "Acer Aspire 3",
+                "brand": "Acer",
+                "category": "laptop",
+                "price": 45000,
+                "stock": 6
+              },
+              {
+                "id": 2,
+                "name": "MSI Modern 15",
+                "brand": "MSI",
+                "category": "laptop",
+                "price": 48000,
+                "stock": 4
+              }
+            ],
+            "message": null
+          }
+        }
+      ],
+      "note": null,
+      "query": "Покажи ноутбуки до 50 тысяч"
+    },
+    {
+      "content": "",
+      "tool_calls": [
+        {
+          "name": "search_products",
+          "args": {
+            "category": "other"
+          },
+          "id": "chatcmpl-tool-b98da75b87c8f87b"
+        }
+      ],
+      "searched": true,
+      "returned_to_model": false,
+      "outcomes": [
+        {
+          "name": "search_products",
+          "args": {
+            "category": "other",
+            "max_price": null,
+            "sort_by": "price_asc"
+          },
+          "searched": true,
+          "error": null,
+          "result": {
+            "params": {
+              "category": "other",
+              "max_price": null,
+              "sort_by": "price_asc"
+            },
+            "products": [],
+            "message": "Категория не поддерживается. Поиск по каталогу не выполняется."
+          }
+        }
+      ],
+      "note": null,
+      "query": "Найди холодильники"
+    },
+    {
+      "content": "Привет! Я — ассистент каталога товаров.",
+      "tool_calls": [],
+      "searched": false,
+      "returned_to_model": false,
+      "outcomes": [],
+      "note": "Модель не вызвала инструмент, поиск не запускался.",
+      "query": "Привет! Как тебя зовут?"
+    }
+  ],
+  "approach_comparison": "В текстовой цепочке схема ProductQuery описана в системном промпте инструкциями формата. Модель пишет JSON в content, парсер достает поля из этого текста, Pydantic их проверяет, и программа вызывает поиск. У инструмента схема описана аргументами search_products и передается через bind_tools. Вызов из ответа разбирает сервер провайдера и кладет его в tool_calls. Приложение проверяет args через ProductQuery и само выполняет SQL. Результат поиска модели не отправляется."
+}
