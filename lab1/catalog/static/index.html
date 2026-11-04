@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Каталог</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: #fff;
+      color: #1c1c1c;
+      font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, input { font: inherit; color: inherit; }
+    .app {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+    aside { border-right: 1px solid #e4e4e4; }
+    .brand {
+      margin: 0;
+      padding: 20px 16px 8px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    nav { display: flex; flex-direction: column; padding: 8px; }
+    nav button {
+      text-align: left;
+      border: 0;
+      background: transparent;
+      border-radius: 6px;
+      padding: 8px 10px;
+      cursor: pointer;
+    }
+    nav button[aria-current="true"] { background: #f2f2f2; }
+    main { min-width: 0; padding: 20px 24px 32px; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    h1 { margin: 0 0 4px; font-size: 22px; font-weight: 600; }
+    .summary { margin: 0; max-width: 70ch; color: #5c5c5c; }
+    .actions { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+    #run, #raw, #ask button {
+      border-radius: 6px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    #run, #ask button { border: 0; background: #1c1c1c; color: #fff; }
+    #run:disabled, #ask button:disabled { opacity: 0.45; cursor: wait; }
+    #raw { border: 1px solid #cfcfcf; background: #fff; }
+    #raw[aria-pressed="true"] { background: #f2f2f2; }
+    #ask { display: flex; gap: 8px; }
+    #ask[hidden] { display: none; }
+    #question {
+      width: min(360px, 46vw);
+      border: 1px solid #cfcfcf;
+      border-radius: 6px;
+      padding: 8px 10px;
+      background: #fff;
+    }
+    .result { margin-top: 16px; }
+    .result h2 { margin: 0 0 6px; font-size: 16px; font-weight: 600; }
+    .result p { margin: 0; color: #3a3a3a; }
+    .result ul { margin: 8px 0 0; padding-left: 18px; }
+    #status { color: #5c5c5c; font-size: 13px; }
+    .board-wrap {
+      margin-top: 20px;
+      border: 1px solid #e4e4e4;
+      border-radius: 8px;
+      overflow: auto;
+    }
+    .board { position: relative; }
+    .board svg { position: absolute; inset: 0; }
+    .node {
+      position: absolute;
+      width: 168px;
+      height: 70px;
+      padding: 10px 12px;
+      text-align: left;
+      background: #fff;
+      border: 1px solid #cfcfcf;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .node strong { display: block; font-size: 14px; font-weight: 600; }
+    .node span {
+      display: -webkit-box;
+      margin-top: 4px;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      color: #5c5c5c;
+      font-size: 12px;
+      line-height: 1.3;
+    }
+    .node.selected { border-color: #1c1c1c; box-shadow: inset 0 0 0 1px #1c1c1c; }
+    .node.error { border-color: #b42318; }
+    .node.warn { border-color: #b54708; }
+    .node.error.selected { box-shadow: inset 0 0 0 1px #b42318; }
+    .trace, .raw-panel { margin-top: 16px; }
+    .trace h2, .raw-panel h2 { margin: 0 0 8px; font-size: 14px; font-weight: 600; }
+    pre {
+      margin: 0 0 16px;
+      padding: 12px 14px;
+      overflow: auto;
+      max-height: 320px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #fafafa;
+      border: 1px solid #e4e4e4;
+      border-radius: 8px;
+      font: 12px/1.5 ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .placeholder {
+      margin-top: 20px;
+      padding: 28px 16px;
+      color: #5c5c5c;
+      text-align: center;
+      border: 1px dashed #d0d0d0;
+      border-radius: 8px;
+    }
+    .menu-error { margin: 12px; color: #b42318; }
+    .report { max-width: 920px; margin-top: 12px; }
+    .report h1 { margin: 0 0 8px; font-size: 22px; font-weight: 600; }
+    .report h3 { margin: 20px 0 8px; font-size: 15px; font-weight: 600; }
+    .report p { margin: 8px 0; }
+    .report ul, .report ol { margin: 8px 0; padding-left: 22px; }
+    .report li { margin: 4px 0; }
+    .report table { width: 100%; margin: 12px 0 18px; border-collapse: collapse; font-size: 13px; }
+    .report th, .report td { border: 1px solid #e4e4e4; padding: 6px 8px; text-align: left; vertical-align: top; }
+    .report th { background: #fafafa; font-weight: 600; }
+    .report code { padding: 1px 4px; background: #f6f6f6; border-radius: 4px; font: 12px/1.4 ui-monospace, "SF Mono", Menlo, monospace; }
+    .report pre { max-height: none; }
+    .report pre code { padding: 0; background: transparent; }
+    @media (max-width: 800px) {
+      .app { grid-template-columns: 1fr; }
+      aside { border-right: 0; border-bottom: 1px solid #e4e4e4; }
+      nav { flex-direction: row; overflow-x: auto; }
+      nav button { white-space: nowrap; }
+      header { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside>
+      <p class="brand">Каталог</p>
+      <nav id="menu"></nav>
+    </aside>
+    <main>
+      <header>
+        <div>
+          <h1 id="title">Сценарии</h1>
+          <p class="summary" id="summary"></p>
+        </div>
+        <div class="actions">
+          <form id="ask" hidden>
+            <input id="question" type="text" placeholder="Ноутбуки до 70 тысяч" autocomplete="off">
+            <button type="submit">Найти</button>
+          </form>
+          <button id="raw" type="button" aria-pressed="false">Сырой результат</button>
+          <button id="run" type="button" disabled>Запустить</button>
+          <span id="status"></span>
+        </div>
+      </header>
+      <div id="stage"></div>
+    </main>
+  </div>
+  <script>
+    const NODE_W = 168;
+    const NODE_H = 70;
+    const GAP_X = 72;
+    const GAP_Y = 36;
+    const PAD = 20;
+
+    const menu = document.querySelector("#menu");
+    const title = document.querySelector("#title");
+    const summary = document.querySelector("#summary");
+    const runButton = document.querySelector("#run");
+    const askForm = document.querySelector("#ask");
+    const question = document.querySelector("#question");
+    const askButton = askForm.querySelector("button");
+    const rawButton = document.querySelector("#raw");
+    const status = document.querySelector("#status");
+    const stage = document.querySelector("#stage");
+
+    const views = new Map();
+    let flows = [];
+    let current = null;
+    let timer = null;
+    let activeRun = null;
+
+    function viewOf(id) {
+      if (!views.has(id)) {
+        views.set(id, {
+          status: "idle",
+          output: "",
+          report: null,
+          pipeline: null,
+          selected: null,
+          rawOpen: false,
+          loadToken: 0,
+          runId: null,
+        });
+      }
+      return views.get(id);
+    }
+
+    function select(flow) {
+      current = flow;
+      history.replaceState(null, "", "#" + flow.id);
+      paint();
+      const view = viewOf(flow.id);
+      if (flow.kind === "document") {
+        if (!view.markdown) loadDocument(flow.id);
+        return;
+      }
+      if (flow.kind === "ask") return;
+      if (view.status === "idle") loadSaved(flow.id);
+    }
+
+    async function loadDocument(id) {
+      const view = viewOf(id);
+      const token = ++view.loadToken;
+      let response;
+      try {
+        response = await fetch("/api/report");
+      } catch (error) {
+        return;
+      }
+      if (view.loadToken !== token) return;
+      if (!response.ok) {
+        view.status = "error";
+        view.output = "Отчет не найден.";
+        if (current && current.id === id) paint();
+        return;
+      }
+      const payload = await response.json();
+      if (view.loadToken !== token) return;
+      view.status = "saved";
+      view.markdown = payload.markdown;
+      if (current && current.id === id) paint();
+    }
+
+    async function loadSaved(id) {
+      const view = viewOf(id);
+      const token = ++view.loadToken;
+      let response;
+      try {
+        response = await fetch("/api/results/" + id);
+      } catch (error) {
+        return;
+      }
+      if (view.loadToken !== token || view.status !== "idle") return;
+      if (!response.ok) {
+        if (current && current.id === id) paint();
+        return;
+      }
+      const payload = await response.json();
+      if (view.loadToken !== token || view.status !== "idle") return;
+      view.status = "saved";
+      view.pipeline = payload.pipeline;
+      view.report = payload.report;
+      view.selected = payload.pipeline.nodes[0].id;
+      if (current && current.id === id) paint();
+    }
+
+    function paint() {
+      const flow = current;
+      const view = flow ? viewOf(flow.id) : null;
+      for (const button of menu.querySelectorAll("button")) {
+        button.setAttribute("aria-current", flow && button.dataset.id === flow.id ? "true" : "false");
+      }
+      const documentMode = Boolean(flow && flow.kind === "document");
+      const askMode = Boolean(flow && flow.kind === "ask");
+      title.textContent = flow ? flow.title : "Сценарии";
+      summary.textContent = flow ? flow.summary : "";
+      askForm.hidden = !askMode;
+      askButton.disabled = Boolean(view && view.status === "running");
+      runButton.hidden = documentMode || askMode;
+      runButton.disabled = !flow || documentMode || askMode || (view && view.status === "running");
+      rawButton.setAttribute("aria-pressed", view && view.rawOpen ? "true" : "false");
+      rawButton.textContent = documentMode
+        ? (view && view.rawOpen ? "Скрыть текст" : "Текст отчета")
+        : (view && view.rawOpen ? "Скрыть сырой результат" : "Сырой результат");
+      status.textContent = documentMode ? "" : statusText(view);
+      stage.replaceChildren();
+      if (documentMode) {
+        if (!view || !view.markdown) {
+          const note = document.createElement("p");
+          note.className = "placeholder";
+          note.textContent = view && view.status === "error" ? view.output : "Отчет загружается.";
+          stage.append(note);
+        } else if (view.rawOpen) {
+          const body = document.createElement("pre");
+          body.textContent = view.markdown;
+          stage.append(body);
+        } else {
+          stage.append(renderArticle(view.markdown));
+        }
+        return;
+      }
+      if (!view || !view.pipeline) {
+        const note = document.createElement("p");
+        note.className = "placeholder";
+        note.textContent = placeholder(view);
+        stage.append(note);
+      } else {
+        const result = askMode ? renderResult(view) : null;
+        if (result) stage.append(result);
+        stage.append(renderBoard(view), renderTrace(view));
+      }
+      if (view && view.rawOpen) stage.append(renderRaw(view));
+    }
+
+    function statusText(view) {
+      if (!view || view.status === "idle") return "";
+      if (view.status === "running") {
+        const seconds = Math.max(0, Math.round((Date.now() - view.startedAt) / 1000));
+        return "Идет " + seconds + " с";
+      }
+      if (view.status === "saved") return "Сохраненный прогон";
+      if (view.status === "error") return "Ошибка";
+      return "Готово";
+    }
+
+    function placeholder(view) {
+      if (current && current.kind === "ask" && (!view || view.status === "idle")) {
+        return "Напишите вопрос. Появится пайплайн, трейс шага и найденные товары.";
+      }
+      if (!view || view.status === "idle") return "Для этого сценария прогона еще нет.";
+      if (view.status === "running") return view.output || "Прогон идет. Граф появится после завершения.";
+      if (view.status === "error") return view.output || "Прогон завершился с ошибкой.";
+      return "Для этого сценария прогона еще нет.";
+    }
+
+    function renderResult(view) {
+      const report = view.report;
+      if (!report) return null;
+      const section = document.createElement("section");
+      section.className = "result";
+      const heading = document.createElement("h2");
+      heading.textContent = report.query || "Результат";
+      const params = document.createElement("p");
+      if (report.error) params.textContent = report.error;
+      else params.textContent = formatParams(report.params);
+      section.append(heading, params);
+      if (report.products && report.products.length) {
+        const list = document.createElement("ul");
+        for (const item of report.products) {
+          const line = document.createElement("li");
+          line.textContent = item;
+          list.append(line);
+        }
+        section.append(list);
+      } else if (report.message) {
+        const note = document.createElement("p");
+        note.textContent = report.message;
+        section.append(note);
+      }
+      return section;
+    }
+
+    function formatParams(params) {
+      if (!params) return "Параметры не получены.";
+      const price = params.max_price == null ? "без потолка цены" : "до " + params.max_price;
+      const order = params.sort_by === "price_desc" ? "сначала дорогие" : "сначала дешевые";
+      return "Параметры: " + params.category + ", " + price + ", " + order;
+    }
+
+    function renderArticle(markdown) {
+      const article = document.createElement("article");
+      article.className = "report";
+      for (const block of markdownBlocks(markdown)) {
+        if (block.type === "heading") {
+          if (block.level === 1) continue;
+          const heading = document.createElement("h" + block.level);
+          appendInline(heading, block.text);
+          article.append(heading);
+        } else if (block.type === "paragraph") {
+          const paragraph = document.createElement("p");
+          appendInline(paragraph, block.text);
+          article.append(paragraph);
+        } else if (block.type === "list") {
+          const list = document.createElement(block.ordered ? "ol" : "ul");
+          for (const item of block.items) {
+            const line = document.createElement("li");
+            appendInline(line, item);
+            list.append(line);
+          }
+          article.append(list);
+        } else if (block.type === "table") {
+          article.append(renderTable(block.rows));
+        } else if (block.type === "code") {
+          const pre = document.createElement("pre");
+          const code = document.createElement("code");
+          code.textContent = block.text;
+          pre.append(code);
+          article.append(pre);
+        }
+      }
+      return article;
+    }
+
+    function markdownBlocks(markdown) {
+      const lines = markdown.replace(/\r\n/g, "\n").split("\n");
+      const blocks = [];
+      let index = 0;
+      while (index < lines.length) {
+        const line = lines[index];
+        if (!line.trim()) {
+          index += 1;
+          continue;
+        }
+        if (line.startsWith("```")) {
+          const body = [];
+          index += 1;
+          while (index < lines.length && !lines[index].startsWith("```")) {
+            body.push(lines[index]);
+            index += 1;
+          }
+          index += 1;
+          blocks.push({ type: "code", text: body.join("\n") });
+          continue;
+        }
+        if (line.startsWith("|")) {
+          const rows = [];
+          while (index < lines.length && lines[index].startsWith("|")) {
+            if (!/^\|\s*-+/.test(lines[index])) rows.push(splitRow(lines[index]));
+            index += 1;
+          }
+          blocks.push({ type: "table", rows });
+          continue;
+        }
+        const heading = /^(#{1,3})\s+(.*)$/.exec(line);
+        if (heading) {
+          blocks.push({ type: "heading", level: heading[1].length, text: heading[2] });
+          index += 1;
+          continue;
+        }
+        if (/^[-*]\s+/.test(line) || /^\d+\.\s+/.test(line)) {
+          const ordered = /^\d+\.\s+/.test(line);
+          const items = [];
+          while (index < lines.length && (ordered ? /^\d+\.\s+/.test(lines[index]) : /^[-*]\s+/.test(lines[index]))) {
+            items.push(lines[index].replace(ordered ? /^\d+\.\s+/ : /^[-*]\s+/, ""));
+            index += 1;
+          }
+          blocks.push({ type: "list", ordered, items });
+          continue;
+        }
+        const paragraph = [];
+        while (
+          index < lines.length &&
+          lines[index].trim() &&
+          !lines[index].startsWith("#") &&
+          !lines[index].startsWith("|") &&
+          !lines[index].startsWith("```") &&
+          !/^[-*]\s+/.test(lines[index]) &&
+          !/^\d+\.\s+/.test(lines[index])
+        ) {
+          paragraph.push(lines[index].trim());
+          index += 1;
+        }
+        blocks.push({ type: "paragraph", text: paragraph.join(" ") });
+      }
+      return blocks;
+    }
+
+    function splitRow(line) {
+      return line.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((cell) => cell.trim());
+    }
+
+    function renderTable(rows) {
+      const table = document.createElement("table");
+      const head = document.createElement("thead");
+      const body = document.createElement("tbody");
+      rows.forEach((row, rowIndex) => {
+        const tr = document.createElement("tr");
+        for (const cell of row) {
+          const td = document.createElement(rowIndex === 0 ? "th" : "td");
+          appendInline(td, cell);
+          tr.append(td);
+        }
+        (rowIndex === 0 ? head : body).append(tr);
+      });
+      table.append(head, body);
+      return table;
+    }
+
+    function appendInline(parent, text) {
+      const pattern = /(\*\*[^*]+\*\*|`[^`]+`)/g;
+      let last = 0;
+      for (const match of text.matchAll(pattern)) {
+        if (match.index > last) parent.append(document.createTextNode(text.slice(last, match.index)));
+        const token = match[0];
+        const node = document.createElement(token.startsWith("**") ? "strong" : "code");
+        node.textContent = token.startsWith("**") ? token.slice(2, -2) : token.slice(1, -1);
+        parent.append(node);
+        last = match.index + token.length;
+      }
+      if (last < text.length) parent.append(document.createTextNode(text.slice(last)));
+    }
+
+    function renderBoard(view) {
+      const wrap = document.createElement("div");
+      wrap.className = "board-wrap";
+      const board = document.createElement("div");
+      board.className = "board";
+      const placed = view.pipeline.nodes.map((node) => ({
+        ...node,
+        x: PAD + node.column * (NODE_W + GAP_X),
+        y: PAD + node.row * (NODE_H + GAP_Y),
+      }));
+      const width = Math.max(...placed.map((node) => node.x + NODE_W)) + PAD;
+      const height = Math.max(...placed.map((node) => node.y + NODE_H)) + PAD;
+      board.style.width = width + "px";
+      board.style.height = height + "px";
+      const byId = Object.fromEntries(placed.map((node) => [node.id, node]));
+      board.append(renderEdges(view.pipeline.edges, byId, width, height));
+      for (const node of placed) board.append(renderNode(node, view));
+      wrap.append(board);
+      return wrap;
+    }
+
+    function renderEdges(edges, byId, width, height) {
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("width", width);
+      svg.setAttribute("height", height);
+      const defs = document.createElementNS("http://www.w3.org/2000/svg", "defs");
+      const marker = document.createElementNS("http://www.w3.org/2000/svg", "marker");
+      marker.setAttribute("id", "arrow");
+      marker.setAttribute("viewBox", "0 0 8 8");
+      marker.setAttribute("markerWidth", "8");
+      marker.setAttribute("markerHeight", "8");
+      marker.setAttribute("refX", "7");
+      marker.setAttribute("refY", "4");
+      marker.setAttribute("orient", "auto");
+      const head = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      head.setAttribute("d", "M0,0 L8,4 L0,8 Z");
+      head.setAttribute("fill", "#b0b0b0");
+      marker.append(head);
+      defs.append(marker);
+      svg.append(defs);
+      for (const [source, target] of edges) {
+        const from = byId[source];
+        const to = byId[target];
+        if (!from || !to) continue;
+        const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        const x1 = from.x + NODE_W;
+        const y1 = from.y + NODE_H / 2;
+        const x2 = to.x;
+        const y2 = to.y + NODE_H / 2;
+        const mid = (x1 + x2) / 2;
+        path.setAttribute("d", "M " + x1 + " " + y1 + " C " + mid + " " + y1 + ", " + mid + " " + y2 + ", " + x2 + " " + y2);
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", "#c8c8c8");
+        path.setAttribute("stroke-width", "1.5");
+        path.setAttribute("marker-end", "url(#arrow)");
+        svg.append(path);
+      }
+      return svg;
+    }
+
+    function renderNode(node, view) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "node " + (node.status || "ok") + (view.selected === node.id ? " selected" : "");
+      button.style.left = node.x + "px";
+      button.style.top = node.y + "px";
+      const name = document.createElement("strong");
+      name.textContent = node.title;
+      const hint = document.createElement("span");
+      hint.textContent = node.summary;
+      button.append(name, hint);
+      button.addEventListener("click", () => {
+        view.selected = node.id;
+        paint();
+      });
+      return button;
+    }
+
+    function renderTrace(view) {
+      const node = view.pipeline.nodes.find((item) => item.id === view.selected) || view.pipeline.nodes[0];
+      const section = document.createElement("section");
+      section.className = "trace";
+      const heading = document.createElement("h2");
+      heading.textContent = node.title;
+      const body = document.createElement("pre");
+      body.textContent = node.trace;
+      section.append(heading, body);
+      return section;
+    }
+
+    function renderRaw(view) {
+      const section = document.createElement("section");
+      section.className = "raw-panel";
+      if (view.output) {
+        const heading = document.createElement("h2");
+        heading.textContent = "Журнал";
+        const body = document.createElement("pre");
+        body.textContent = view.output;
+        section.append(heading, body);
+      }
+      if (view.report) {
+        const heading = document.createElement("h2");
+        heading.textContent = "JSON";
+        const body = document.createElement("pre");
+        body.textContent = JSON.stringify(view.report, null, 2);
+        section.append(heading, body);
+      }
+      if (!section.childElementCount) {
+        const heading = document.createElement("h2");
+        heading.textContent = "Сырой результат";
+        const body = document.createElement("pre");
+        body.textContent = "Пока пусто.";
+        section.append(heading, body);
+      }
+      return section;
+    }
+
+    askForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!current || current.kind !== "ask" || askButton.disabled) return;
+      const query = question.value.trim();
+      if (!query) return;
+      const view = viewOf(current.id);
+      askButton.disabled = true;
+      let response;
+      try {
+        response = await fetch("/api/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query }),
+        });
+      } catch (error) {
+        status.textContent = "Нет связи с сервером";
+        askButton.disabled = false;
+        return;
+      }
+      const payload = await response.json();
+      if (!response.ok) {
+        status.textContent = payload.error || "Не удалось запустить";
+        askButton.disabled = false;
+        return;
+      }
+      view.status = "running";
+      view.startedAt = Date.now();
+      view.output = "";
+      view.pipeline = null;
+      view.report = null;
+      view.selected = null;
+      view.runId = payload.id;
+      activeRun = { flowId: current.id, runId: payload.id };
+      paint();
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => refresh().catch(() => {}), 400);
+      refresh();
+    });
+
+    rawButton.addEventListener("click", () => {
+      if (!current) return;
+      const view = viewOf(current.id);
+      view.rawOpen = !view.rawOpen;
+      paint();
+    });
+
+    runButton.addEventListener("click", async () => {
+      if (!current || runButton.disabled) return;
+      const flow = current;
+      const view = viewOf(flow.id);
+      runButton.disabled = true;
+      let response;
+      try {
+        response = await fetch("/api/runs", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ flow: flow.id }),
+        });
+      } catch (error) {
+        status.textContent = "Нет связи с сервером";
+        runButton.disabled = false;
+        return;
+      }
+      const payload = await response.json();
+      if (!response.ok) {
+        status.textContent = payload.error || "Не удалось запустить";
+        runButton.disabled = false;
+        return;
+      }
+      view.status = "running";
+      view.startedAt = Date.now();
+      view.output = "";
+      view.pipeline = null;
+      view.report = null;
+      view.selected = null;
+      view.loadToken += 1;
+      view.runId = payload.id;
+      activeRun = { flowId: flow.id, runId: payload.id };
+      paint();
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => refresh().catch(() => {}), 400);
+      refresh();
+    });
+
+    async function refresh() {
+      if (!activeRun) return;
+      const { flowId, runId } = activeRun;
+      const response = await fetch("/api/runs/" + runId);
+      const run = await response.json();
+      const view = viewOf(flowId);
+      if (view.runId !== runId) return;
+      view.status = run.status;
+      view.output = run.output || "";
+      if (run.pipeline) {
+        view.pipeline = run.pipeline;
+        view.report = run.report;
+        if (!view.selected) {
+          const search = flowId === "ask"
+            ? run.pipeline.nodes.find((node) => node.id === "search")
+            : null;
+          view.selected = (search || run.pipeline.nodes[0]).id;
+        }
+      }
+      if (run.status !== "running") {
+        clearInterval(timer);
+        timer = null;
+        activeRun = null;
+      }
+      if (current && current.id === flowId) paint();
+    }
+
+    function showFailure(message) {
+      const note = document.createElement("p");
+      note.className = "menu-error";
+      note.textContent = message;
+      menu.replaceChildren(note);
+    }
+
+    fetch("/api/flows")
+      .then((response) => {
+        if (!response.ok) throw new Error("bad status");
+        return response.json();
+      })
+      .then((items) => {
+        flows = items;
+        menu.replaceChildren();
+        for (const flow of items) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.dataset.id = flow.id;
+          button.textContent = flow.title;
+          button.addEventListener("click", () => select(flow));
+          menu.append(button);
+        }
+        const hashed = items.find((item) => item.id === location.hash.slice(1));
+        select(hashed || items[0]);
+      })
+      .catch(() => showFailure("Список сценариев не загрузился. Обновите страницу."));
+  </script>
+</body>
+</html>
