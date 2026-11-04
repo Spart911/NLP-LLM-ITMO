@@ -1,0 +1,228 @@
+{
+  "errors": [
+    {
+      "kind": "синтаксически некорректный JSON",
+      "text": "это не json",
+      "stage": "Разбор текста в JSON. До проверки полей ProductQuery выполнение не доходит.",
+      "error_type": "OutputParserException",
+      "cause_type": "JSONDecodeError",
+      "message": "Invalid json output: это не json\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE "
+    },
+    {
+      "kind": "значение вне перечисления",
+      "text": "{\"category\": \"fridge\", \"max_price\": 1000, \"sort_by\": \"price_asc\"}",
+      "stage": "JSON уже получен. Ошибка возникает при проверке поля category моделью ProductQuery.",
+      "error_type": "OutputParserException",
+      "cause_type": "ValidationError",
+      "message": "Failed to parse ProductQuery from completion {\"category\": \"fridge\", \"max_price\": 1000, \"sort_by\": \"price_asc\"}. Got: 1 validation error for ProductQuery\ncategory\n  Input should be 'laptop', 'smartphone', 'tablet' or 'other' [type=literal_error, input_value='fridge', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/literal_error\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE "
+    },
+    {
+      "kind": "нарушение числового ограничения",
+      "text": "{\"category\": \"laptop\", \"max_price\": -5, \"sort_by\": \"price_asc\"}",
+      "stage": "JSON уже получен. Ошибка возникает на ограничении max_price >= 0.",
+      "error_type": "OutputParserException",
+      "cause_type": "ValidationError",
+      "message": "Failed to parse ProductQuery from completion {\"category\": \"laptop\", \"max_price\": -5, \"sort_by\": \"price_asc\"}. Got: 1 validation error for ProductQuery\nmax_price\n  Input should be greater than or equal to 0 [type=greater_than_equal, input_value=-5, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.14/v/greater_than_equal\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE "
+    }
+  ],
+  "without_retry": {
+    "ok": false,
+    "attempts": 1,
+    "searched": false,
+    "message": "Не удалось разобрать параметры запроса. Поиск по каталогу не выполнялся.",
+    "result": null,
+    "journal": [
+      {
+        "step": "llm_start",
+        "attempt": 1
+      },
+      {
+        "step": "parse_error",
+        "attempt": 1,
+        "error_type": "OutputParserException",
+        "cause_type": "JSONDecodeError"
+      },
+      {
+        "step": "stopped",
+        "message": "Не удалось разобрать параметры запроса. Поиск по каталогу не выполнялся."
+      }
+    ]
+  },
+  "with_retry": {
+    "ok": true,
+    "attempts": 2,
+    "searched": true,
+    "message": null,
+    "result": {
+      "params": {
+        "category": "laptop",
+        "max_price": 70000,
+        "sort_by": "price_asc"
+      },
+      "products": [
+        {
+          "id": 1,
+          "name": "Acer Aspire 3",
+          "brand": "Acer",
+          "category": "laptop",
+          "price": 45000,
+          "stock": 6
+        },
+        {
+          "id": 2,
+          "name": "MSI Modern 15",
+          "brand": "MSI",
+          "category": "laptop",
+          "price": 48000,
+          "stock": 4
+        },
+        {
+          "id": 3,
+          "name": "Huawei MateBook D16",
+          "brand": "Huawei",
+          "category": "laptop",
+          "price": 54000,
+          "stock": 7
+        },
+        {
+          "id": 4,
+          "name": "Honor MagicBook 14",
+          "brand": "Honor",
+          "category": "laptop",
+          "price": 62000,
+          "stock": 4
+        },
+        {
+          "id": 5,
+          "name": "Lenovo IdeaPad 5",
+          "brand": "Lenovo",
+          "category": "laptop",
+          "price": 69000,
+          "stock": 3
+        }
+      ],
+      "message": null
+    },
+    "journal": [
+      {
+        "step": "llm_start",
+        "attempt": 1
+      },
+      {
+        "step": "parse_error",
+        "attempt": 1,
+        "error_type": "OutputParserException",
+        "cause_type": "JSONDecodeError"
+      },
+      {
+        "step": "llm_start",
+        "attempt": 2
+      },
+      {
+        "step": "parsed",
+        "attempt": 2,
+        "params": {
+          "category": "laptop",
+          "max_price": 70000,
+          "sort_by": "price_asc"
+        }
+      },
+      {
+        "step": "validation",
+        "ok": true,
+        "params": {
+          "category": "laptop",
+          "max_price": 70000,
+          "sort_by": "price_asc"
+        }
+      },
+      {
+        "step": "search",
+        "found": 5,
+        "message": null
+      }
+    ]
+  },
+  "attempts_exhausted": {
+    "ok": false,
+    "attempts": 3,
+    "searched": false,
+    "message": "Не удалось разобрать параметры запроса за 3 попытки. Поиск по каталогу не выполнялся.",
+    "result": null,
+    "journal": [
+      {
+        "step": "llm_start",
+        "attempt": 1
+      },
+      {
+        "step": "parse_error",
+        "attempt": 1,
+        "error_type": "OutputParserException",
+        "cause_type": "JSONDecodeError"
+      },
+      {
+        "step": "llm_start",
+        "attempt": 2
+      },
+      {
+        "step": "parse_error",
+        "attempt": 2,
+        "error_type": "OutputParserException",
+        "cause_type": "JSONDecodeError"
+      },
+      {
+        "step": "llm_start",
+        "attempt": 3
+      },
+      {
+        "step": "parse_error",
+        "attempt": 3,
+        "error_type": "OutputParserException",
+        "cause_type": "JSONDecodeError"
+      },
+      {
+        "step": "stopped",
+        "message": "Не удалось разобрать параметры запроса за 3 попытки. Поиск по каталогу не выполнялся."
+      }
+    ]
+  },
+  "confirmation_declined": {
+    "ok": true,
+    "attempts": 1,
+    "searched": false,
+    "message": "Поиск без ограничения цены отменен.",
+    "result": null,
+    "journal": [
+      {
+        "step": "llm_start",
+        "attempt": 1
+      },
+      {
+        "step": "parsed",
+        "attempt": 1,
+        "params": {
+          "category": "tablet",
+          "max_price": null,
+          "sort_by": "price_asc"
+        }
+      },
+      {
+        "step": "validation",
+        "ok": true,
+        "params": {
+          "category": "tablet",
+          "max_price": null,
+          "sort_by": "price_asc"
+        }
+      },
+      {
+        "step": "confirmation",
+        "accepted": false
+      },
+      {
+        "step": "search_skipped",
+        "reason": "Поиск без ограничения цены отменен."
+      }
+    ]
+  }
+}
