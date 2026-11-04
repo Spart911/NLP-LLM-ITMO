@@ -1,0 +1,285 @@
+{
+  "dialogues": [
+    {
+      "title": "Ноутбуки, порядок, затем смартфоны",
+      "state": {
+        "title": "Ноутбуки, порядок, затем смартфоны",
+        "mode": "state",
+        "turns": [
+          {
+            "query": "Покажи ноутбуки до 80 тысяч",
+            "params": {
+              "category": "laptop",
+              "max_price": 80000,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              "Acer Aspire 3 — 45000",
+              "MSI Modern 15 — 48000",
+              "Huawei MateBook D16 — 54000",
+              "Honor MagicBook 14 — 62000",
+              "Lenovo IdeaPad 5 — 69000"
+            ],
+            "correct": true,
+            "input_tokens": 594,
+            "output_tokens": 36,
+            "error": null
+          },
+          {
+            "query": "А сначала дорогие?",
+            "params": {
+              "category": "laptop",
+              "max_price": 80000,
+              "sort_by": "price_desc"
+            },
+            "products": [
+              "Lenovo IdeaPad 5 — 69000",
+              "Honor MagicBook 14 — 62000",
+              "Huawei MateBook D16 — 54000",
+              "MSI Modern 15 — 48000",
+              "Acer Aspire 3 — 45000"
+            ],
+            "correct": true,
+            "input_tokens": 609,
+            "output_tokens": 22,
+            "error": null
+          },
+          {
+            "query": "А что есть среди смартфонов?",
+            "params": {
+              "category": "smartphone",
+              "max_price": 80000,
+              "sort_by": "price_desc"
+            },
+            "products": [
+              "Xiaomi 14 — 72000",
+              "Google Pixel 8a — 45000",
+              "Samsung Galaxy A35 — 28000",
+              "Honor X9b — 25000",
+              "Realme Note — 15000",
+              "Tecno Spark 20 — 12000"
+            ],
+            "correct": true,
+            "input_tokens": 612,
+            "output_tokens": 36,
+            "error": null
+          }
+        ],
+        "input_tokens": 1815,
+        "correct_turns": 3
+      },
+      "history": {
+        "title": "Ноутбуки, порядок, затем смартфоны",
+        "mode": "history",
+        "turns": [
+          {
+            "query": "Покажи ноутбуки до 80 тысяч",
+            "params": {
+              "category": "laptop",
+              "max_price": 80000,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              "Acer Aspire 3 — 45000",
+              "MSI Modern 15 — 48000",
+              "Huawei MateBook D16 — 54000",
+              "Honor MagicBook 14 — 62000",
+              "Lenovo IdeaPad 5 — 69000"
+            ],
+            "correct": true,
+            "input_tokens": 597,
+            "output_tokens": 36,
+            "error": null
+          },
+          {
+            "query": "А сначала дорогие?",
+            "params": {
+              "category": "laptop",
+              "max_price": 80000,
+              "sort_by": "price_desc"
+            },
+            "products": [
+              "Lenovo IdeaPad 5 — 69000",
+              "Honor MagicBook 14 — 62000",
+              "Huawei MateBook D16 — 54000",
+              "MSI Modern 15 — 48000",
+              "Acer Aspire 3 — 45000"
+            ],
+            "correct": true,
+            "input_tokens": 631,
+            "output_tokens": 27,
+            "error": null
+          },
+          {
+            "query": "А что есть среди смартфонов?",
+            "params": {
+              "category": "smartphone",
+              "max_price": null,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              "Tecno Spark 20 — 12000",
+              "Realme Note — 15000",
+              "Honor X9b — 25000",
+              "Samsung Galaxy A35 — 28000",
+              "Google Pixel 8a — 45000",
+              "Xiaomi 14 — 72000",
+              "Samsung Galaxy S24 — 95000",
+              "iPhone 15 — 110000"
+            ],
+            "correct": false,
+            "input_tokens": 671,
+            "output_tokens": 31,
+            "error": null
+          }
+        ],
+        "input_tokens": 1899,
+        "correct_turns": 2
+      },
+      "input_tokens": {
+        "state": 1815,
+        "history": 1899
+      }
+    },
+    {
+      "title": "Планшеты, потолок цены, затем ноутбуки",
+      "state": {
+        "title": "Планшеты, потолок цены, затем ноутбуки",
+        "mode": "state",
+        "turns": [
+          {
+            "query": "Покажи самые дешевые планшеты",
+            "params": {
+              "category": "tablet",
+              "max_price": null,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              "Lenovo Tab M10 — 16000",
+              "Honor Pad X8 — 18000",
+              "Huawei MatePad SE — 22000",
+              "Samsung Galaxy Tab A9 — 27000",
+              "Xiaomi Pad 6 — 30000",
+              "Huawei MatePad 11 — 54000",
+              "iPad Air — 79000",
+              "Samsung Galaxy Tab S9 — 98000"
+            ],
+            "correct": true,
+            "input_tokens": 593,
+            "output_tokens": 30,
+            "error": null
+          },
+          {
+            "query": "До 30 тысяч",
+            "params": {
+              "category": "tablet",
+              "max_price": 30000,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              "Lenovo Tab M10 — 16000",
+              "Honor Pad X8 — 18000",
+              "Huawei MatePad SE — 22000",
+              "Samsung Galaxy Tab A9 — 27000",
+              "Xiaomi Pad 6 — 30000"
+            ],
+            "correct": true,
+            "input_tokens": 605,
+            "output_tokens": 26,
+            "error": null
+          },
+          {
+            "query": "А ноутбуки?",
+            "params": {
+              "category": "laptop",
+              "max_price": 30000,
+              "sort_by": "price_asc"
+            },
+            "products": [],
+            "correct": true,
+            "input_tokens": 608,
+            "output_tokens": 41,
+            "error": null
+          }
+        ],
+        "input_tokens": 1806,
+        "correct_turns": 3
+      },
+      "history": {
+        "title": "Планшеты, потолок цены, затем ноутбуки",
+        "mode": "history",
+        "turns": [
+          {
+            "query": "Покажи самые дешевые планшеты",
+            "params": {
+              "category": "tablet",
+              "max_price": null,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              "Lenovo Tab M10 — 16000",
+              "Honor Pad X8 — 18000",
+              "Huawei MatePad SE — 22000",
+              "Samsung Galaxy Tab A9 — 27000",
+              "Xiaomi Pad 6 — 30000",
+              "Huawei MatePad 11 — 54000",
+              "iPad Air — 79000",
+              "Samsung Galaxy Tab S9 — 98000"
+            ],
+            "correct": true,
+            "input_tokens": 596,
+            "output_tokens": 30,
+            "error": null
+          },
+          {
+            "query": "До 30 тысяч",
+            "params": {
+              "category": "tablet",
+              "max_price": 30000,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              "Lenovo Tab M10 — 16000",
+              "Honor Pad X8 — 18000",
+              "Huawei MatePad SE — 22000",
+              "Samsung Galaxy Tab A9 — 27000",
+              "Xiaomi Pad 6 — 30000"
+            ],
+            "correct": true,
+            "input_tokens": 626,
+            "output_tokens": 21,
+            "error": null
+          },
+          {
+            "query": "А ноутбуки?",
+            "params": {
+              "category": "laptop",
+              "max_price": null,
+              "sort_by": "price_asc"
+            },
+            "products": [
+              "Acer Aspire 3 — 45000",
+              "MSI Modern 15 — 48000",
+              "Huawei MateBook D16 — 54000",
+              "Honor MagicBook 14 — 62000",
+              "Lenovo IdeaPad 5 — 69000",
+              "ASUS Vivobook 16 — 89000",
+              "Apple MacBook Air — 120000",
+              "Dell Inspiron 15 — 150000"
+            ],
+            "correct": false,
+            "input_tokens": 662,
+            "output_tokens": 31,
+            "error": null
+          }
+        ],
+        "input_tokens": 1884,
+        "correct_turns": 2
+      },
+      "input_tokens": {
+        "state": 1806,
+        "history": 1884
+      }
+    }
+  ]
+}
