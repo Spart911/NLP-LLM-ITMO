@@ -1,0 +1,205 @@
+{
+  "format_instructions_in_system_prompt": true,
+  "cases": [
+    {
+      "query": "Найди ноутбуки дешевле 70 000 рублей",
+      "focus": "Категория и числовое ограничение",
+      "elapsed_sec": 1.466,
+      "result_type": "ProductQuery",
+      "json": "{\"category\":\"laptop\",\"max_price\":70000,\"sort_by\":\"price_asc\"}",
+      "fields": {
+        "category": "laptop",
+        "max_price": 70000,
+        "sort_by": "price_asc"
+      },
+      "check": {
+        "ok": true,
+        "mismatches": {}
+      },
+      "error": null,
+      "ambiguity": null,
+      "interpretation": "Система выбрала категорию laptop, потолок цены 70000 рублей, порядок: сначала дешевые."
+    },
+    {
+      "query": "Покажи самые дорогие смартфоны",
+      "focus": "Сортировка по убыванию цены",
+      "elapsed_sec": 1.507,
+      "result_type": "ProductQuery",
+      "json": "{\"category\":\"smartphone\",\"max_price\":null,\"sort_by\":\"price_desc\"}",
+      "fields": {
+        "category": "smartphone",
+        "max_price": null,
+        "sort_by": "price_desc"
+      },
+      "check": {
+        "ok": true,
+        "mismatches": {}
+      },
+      "error": null,
+      "ambiguity": null,
+      "interpretation": "Система выбрала категорию smartphone, потолок цены не задан, порядок: сначала дорогие."
+    },
+    {
+      "query": "Хочу посмотреть планшеты",
+      "focus": "Запрос без ограничения цены",
+      "elapsed_sec": 0.825,
+      "result_type": "ProductQuery",
+      "json": "{\"category\":\"tablet\",\"max_price\":null,\"sort_by\":\"price_asc\"}",
+      "fields": {
+        "category": "tablet",
+        "max_price": null,
+        "sort_by": "price_asc"
+      },
+      "check": {
+        "ok": true,
+        "mismatches": {}
+      },
+      "error": null,
+      "ambiguity": null,
+      "interpretation": "Система выбрала категорию tablet, потолок цены не задан, порядок: сначала дешевые."
+    },
+    {
+      "query": "Покажи ноутбуки до 50 тысяч",
+      "focus": "Нормализация числового выражения",
+      "elapsed_sec": 1.996,
+      "result_type": "ProductQuery",
+      "json": "{\"category\":\"laptop\",\"max_price\":50000,\"sort_by\":\"price_asc\"}",
+      "fields": {
+        "category": "laptop",
+        "max_price": 50000,
+        "sort_by": "price_asc"
+      },
+      "check": {
+        "ok": true,
+        "mismatches": {}
+      },
+      "error": null,
+      "ambiguity": null,
+      "interpretation": "Система выбрала категорию laptop, потолок цены 50000 рублей, порядок: сначала дешевые."
+    },
+    {
+      "query": "Найди холодильники",
+      "focus": "Категория вне каталога",
+      "elapsed_sec": 1.669,
+      "result_type": "ProductQuery",
+      "json": "{\"category\":\"other\",\"max_price\":null,\"sort_by\":\"price_asc\"}",
+      "fields": {
+        "category": "other",
+        "max_price": null,
+        "sort_by": "price_asc"
+      },
+      "check": {
+        "ok": true,
+        "mismatches": {}
+      },
+      "error": null,
+      "ambiguity": null,
+      "interpretation": "Система выбрала категорию other, потолок цены не задан, порядок: сначала дешевые."
+    },
+    {
+      "query": "Возьми что-нибудь для конспектов и фильмов, тысяч до тридцати",
+      "focus": "Категория не названа, потолок цены спрятан в разговорной форме",
+      "elapsed_sec": 1.538,
+      "result_type": "ProductQuery",
+      "json": "{\"category\":\"tablet\",\"max_price\":30000,\"sort_by\":\"price_asc\"}",
+      "fields": {
+        "category": "tablet",
+        "max_price": 30000,
+        "sort_by": "price_asc"
+      },
+      "check": {
+        "ok": null,
+        "mismatches": {}
+      },
+      "error": null,
+      "ambiguity": "Конспекты и фильмы одинаково подходят планшету и ноутбуку, категория в запросе не названа. «Тысяч до тридцати» задает потолок 30000 рублей.",
+      "interpretation": "Конспекты и фильмы одинаково подходят планшету и ноутбуку, категория в запросе не названа. «Тысяч до тридцати» задает потолок 30000 рублей. Система выбрала категорию tablet, потолок цены 30000 рублей, порядок: сначала дешевые."
+    },
+    {
+      "query": "Нужен нормальный экран в карман, не самый дешевый",
+      "focus": "Размытая категория и порядок без потолка цены",
+      "elapsed_sec": 3.262,
+      "result_type": "ProductQuery",
+      "json": "{\"category\":\"other\",\"max_price\":null,\"sort_by\":\"price_asc\"}",
+      "fields": {
+        "category": "other",
+        "max_price": null,
+        "sort_by": "price_asc"
+      },
+      "check": {
+        "ok": null,
+        "mismatches": {}
+      },
+      "error": null,
+      "ambiguity": "«Экран в карман» обычно означает смартфон, тем же словосочетанием можно назвать маленький планшет. «Не самый дешевый» просит порядок от дорогих к дешевым и не называет верхнюю цену.",
+      "interpretation": "«Экран в карман» обычно означает смартфон, тем же словосочетанием можно назвать маленький планшет. «Не самый дешевый» просит порядок от дорогих к дешевым и не называет верхнюю цену. Система выбрала категорию other, потолок цены не задан, порядок: сначала дешевые."
+    }
+  ],
+  "thinking": [
+    {
+      "query": "Возьми что-нибудь для конспектов и фильмов, тысяч до тридцати",
+      "thinking": false,
+      "elapsed_sec": 1.062,
+      "content": "{\n  \"category\": \"tablet\",\n  \"max_price\": 30000,\n  \"sort_by\": \"price_asc\"\n}",
+      "reasoning": null,
+      "parsed": {
+        "category": "tablet",
+        "max_price": 30000,
+        "sort_by": "price_asc"
+      },
+      "parse_error": null,
+      "input_tokens": 538,
+      "output_tokens": 35,
+      "reasoning_tokens": 0
+    },
+    {
+      "query": "Возьми что-нибудь для конспектов и фильмов, тысяч до тридцати",
+      "thinking": true,
+      "elapsed_sec": 1.876,
+      "content": "{\"category\": \"tablet\", \"max_price\": 30000, \"sort_by\": \"price_asc\"}",
+      "reasoning": "The user is asking for something for notes and movies, up to 30 thousand rubles.\n\n\"Для конспектов и фильмов\" - for notes and movies. This sounds like a tablet (планшет) - you can take notes and watch movies on a tablet.\n\n\"тысяч до тридцати\" - up to 30 thousand = 30000 rubles.\n\nNo sorting specified, so price_asc.\n\nCategory: tablet\nMax_price: 30000\nSort_by: price_asc",
+      "parsed": {
+        "category": "tablet",
+        "max_price": 30000,
+        "sort_by": "price_asc"
+      },
+      "parse_error": null,
+      "input_tokens": 562,
+      "output_tokens": 142,
+      "reasoning_tokens": 115
+    },
+    {
+      "query": "Нужен нормальный экран в карман, не самый дешевый",
+      "thinking": false,
+      "elapsed_sec": 0.884,
+      "content": "{\n  \"category\": \"other\",\n  \"max_price\": null,\n  \"sort_by\": \"price_asc\"\n}",
+      "reasoning": null,
+      "parsed": {
+        "category": "other",
+        "max_price": null,
+        "sort_by": "price_asc"
+      },
+      "parse_error": null,
+      "input_tokens": 533,
+      "output_tokens": 30,
+      "reasoning_tokens": 0
+    },
+    {
+      "query": "Нужен нормальный экран в карман, не самый дешевый",
+      "thinking": true,
+      "elapsed_sec": 4.416,
+      "content": "{\"category\": \"smartphone\", \"max_price\": null, \"sort_by\": \"price_asc\"}",
+      "reasoning": "Let me analyze the request: \"Нужен нормальный экран в карман, не самый дешевый\"\n\n- \"экран в карман\" — this refers to a smartphone (a device that fits in a pocket with a screen). So category = smartphone.\n- \"не самый дешевый\" — this means they don't want the cheapest one, but it doesn't specify a price limit. It's more of a preference, not a hard price cap. So max_price = null.\n- \"не самый дешевый\" — this implies they want to see more expensive ones first, or at least not sorted by cheapest first. Actually, \"не самый дешевый\" means they don't want the cheapest, which implies they want to see pricier options first. So sort_by = price_desc.\n\nWait, let me reconsider. \"Не самый дешевый\" could mean:\n1. They want to see expensive ones first (price_desc)\n2. They just don't want the absolute cheapest, but no specific sorting preference\n\nThe instruction says: \"sort_by = price_desc, когда просят сначала дорогие или самые дорогие.\" and \"sort_by = price_asc, когда просят сначала дешевые или порядок не указан.\"\n\n\"Не самый дешевый\" is not explicitly asking for \"сначала дорогие\" or \"самые дорогие\". It's more of a qualifier. The order isn't explicitly specified. So I should default to price_asc.\n\nActually, re-reading: \"не самый дешевый\" — this is a preference against the cheapest, but it's not the same as \"сначала дорогие\". The user isn't asking to sort by expensive first, they're just saying they don't want the cheapest. This is more of a filter preference than a sorting instruction. Since no explicit sorting order is given, I'll use the default price_asc.\n\nFinal answer:\n- category: smartphone\n- max_price: null\n- sort_by: price_asc",
+      "parsed": {
+        "category": "smartphone",
+        "max_price": null,
+        "sort_by": "price_asc"
+      },
+      "parse_error": null,
+      "input_tokens": 557,
+      "output_tokens": 427,
+      "reasoning_tokens": 403
+    }
+  ],
+  "thinking_summary": "«Возьми что-нибудь для конспектов и фильмов, тысяч до тридцати»: без рассуждения 1.062 с, выходных токенов 35 (из них рассуждение 0), разбор content: успешен. С рассуждением 1.876 с, выходных токенов 142 (из них рассуждение 115), разбор content: успешен; рассуждение записано отдельным полем и в content не входит. «Нужен нормальный экран в карман, не самый дешевый»: без рассуждения 0.884 с, выходных токенов 30 (из них рассуждение 0), разбор content: успешен. С рассуждением 4.416 с, выходных токенов 427 (из них рассуждение 403), разбор content: успешен; рассуждение записано отдельным полем и в content не входит. Парсер читает только content. Текст рассуждения хранится отдельно и в строку, которую разбирают как JSON, не подмешивается."
+}
